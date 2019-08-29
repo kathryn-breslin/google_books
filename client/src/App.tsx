@@ -1,11 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Search from "../src/pages/Search";
+import Saved from "../src/pages/Saved";
 import './App.css';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+    <Router>
+      <div>
+        <Route exact path="/" component={Search} />
+        <Route exact path="/saved" component={Saved}/>
+      </div>
+    </Router>
   );
 }
 
