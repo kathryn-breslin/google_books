@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { SearchBar } from "../../components/SearchBar";
-// import API from "../../utils/API";
+import API from "../../utils/API";
 
 interface IProps {
   results: {};
@@ -9,16 +9,21 @@ interface IProps {
 }
 class Search extends Component {
   state: IProps = {
-    results: {},
+    results: [],
     search: ""
   };
 
-  // searchBooks = (query: string) => {
-  //     API.search(query)
-  //     .then(res => this.setState({ result: res.data }))
-  //     .catch(err => console.log(err));
-  //     console.log(this.state.result);
-  // }
+  searchBooks = (search: string) => {
+      console.log("This is the search being passed: " + search);
+      API.search(search)
+      .then(res => 
+        // this.setState({ results: res.data })
+        console.log(res.data)
+        )
+      .catch(err => console.log(err));
+    //   console.log(this.state.results)
+    //   console.log(API);
+  }
 
   handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -32,9 +37,9 @@ class Search extends Component {
     const { search } = this.state;
 
     event.preventDefault();
-    // this.searchBooks(search);
-    console.log("Search:" + search);
-    // this.setState({ search: search})
+    this.setState({ search: search});
+    this.searchBooks(search);
+    console.log("Search:" + this.state.search);
   };
 
   render() {
