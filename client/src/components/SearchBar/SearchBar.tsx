@@ -1,18 +1,18 @@
 import React from "react";
 
 interface IProps {
-    value: string;
+    search: string;
     handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void; 
-    handleFormSearch: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void; 
+    handleFormSearch: (event: React.MouseEvent<HTMLElement>) => void; 
 }
-const SearchBar = ({ value, handleInputChange, handleFormSearch}: IProps) =>  {
+const SearchBar = ({ search, handleInputChange, handleFormSearch}: IProps) =>  {
     return (
         <form>
             <div className="form-group">
-                <label>Search</label>
+                <label htmlFor="search">Search</label>
                 <input
                 onChange={handleInputChange}
-                value={value}
+                value={search}
                 name="search"
                 type="text"
                 className="form-control"
