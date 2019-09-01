@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { SearchBar } from "../../components";
+import { SearchBar, Books, BookItem } from "../../components";
 import API from "../../utils/API";
 
 interface IContent {
@@ -52,23 +52,24 @@ class Search extends Component {
     console.log("Search:" + this.state.search);
   };
 
-  renderBooks() {
-    const { books } = this.state;
-    console.log("Books: ", books);
+  // renderBooks() {
+  //   const { books } = this.state;
+  //   console.log("Books: ", books);
 
-    const allBooks = books.map((item, index) => {
-      return (
-        <li className="list-group-item" key={index}>
-          <p>{item.volumeInfo.title}</p>
-          <p>{item.volumeInfo.description}</p>
-          <img alt={item.volumeInfo.title} src={item.volumeInfo.imageLinks.smallThumbnail}/>
-        </li>
-      );
-    });
-    return <ul className="list-group">{allBooks}</ul>;
-  }
+  //   const allBooks = books.map((item, index) => {
+  //     return (
+  //       <li className="list-group-item" key={index}>
+  //         <img alt={item.volumeInfo.title} src={item.volumeInfo.imageLinks.smallThumbnail}/>
+  //         <div>          
+  //           <h1>{item.volumeInfo.title}</h1>
+  //           <p>{item.volumeInfo.description}</p></div>
+  //       </li>
+  //     );
+  //   });
+  //   return <ul className="list-group">{allBooks}</ul>;
+  // }
   render() {
-    const { search } = this.state;
+    const { search, books } = this.state;
 
     return (
       <div>
@@ -85,7 +86,22 @@ class Search extends Component {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <>{this.renderBooks()}</>
+              {/* <>{this.renderBooks()}</> */}
+              {books.length ? (
+                <Books>
+                  {books.map(item=> (
+                    <BookItem>
+                        <img alt={item.volumeInfo.title} src={item.volumeInfo.imageLinks.smallThumbnail}/>
+                          <div>          
+                              <h1>{item.volumeInfo.title}</h1>
+                              <p>{item.volumeInfo.description}</p>
+                          </div>
+                    </BookItem>
+                  ))}
+                </Books>
+              ): (
+                <h1>No Books</h1>
+              )}
             </div>
           </div>
         </div>
