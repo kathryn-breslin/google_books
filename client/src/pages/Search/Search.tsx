@@ -10,22 +10,23 @@ interface IContent {
 }
 
 interface IBook {
-  items: IContent[], 
+  books: IContent[], 
   title: string, 
   description: string,
-  image: string
+  image: string,
+  search: string
 }
 
-interface IProps {
-  results: IBook[];
-  search: string;
-  title: string, 
-  description: string,
-  image: string
-}
+// interface IProps {
+//   results: IBook[];
+//   search: string;
+//   title: string, 
+//   description: string,
+//   image: string
+// }
 class Search extends Component {
-  state: IProps = {
-    results: [],
+  state: IBook = {
+    books: [],
     search: "",
     title: "", 
     description: "",
@@ -38,7 +39,7 @@ class Search extends Component {
       .then(results => 
         results.data.items.filter(
           (          result: { volumeInfo: { title: any; description: any; imageLinks: any;}; }) => 
-          this.state.results.push(result.volumeInfo.title)
+          this.state.books.push({ title: result.volumeInfo.title, description: result.volumeInfo.description, image: result.volumeInfo.imageLinks})
           // result.volumeInfo.description, 
           // result.volumeInfo.imageLinks
 
@@ -47,7 +48,7 @@ class Search extends Component {
         )
 
       // .catch(err => console.log(err));
-      console.log(this.state.results);
+      console.log(this.state.books);
   }
 
   handleInputChange = (event: { target: { name: any; value: any } }) => {
