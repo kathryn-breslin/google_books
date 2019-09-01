@@ -3,26 +3,51 @@ import { Link } from "react-router-dom";
 import { SearchBar } from "../../components/SearchBar";
 import API from "../../utils/API";
 
+interface IContent {
+ title: string, 
+ description: string,
+ image: string
+}
+
+interface IBook {
+  items: IContent[], 
+  title: string, 
+  description: string,
+  image: string
+}
+
 interface IProps {
-  results: {};
+  results: IBook[];
   search: string;
+  title: string, 
+  description: string,
+  image: string
 }
 class Search extends Component {
   state: IProps = {
     results: [],
-    search: ""
+    search: "",
+    title: "", 
+    description: "",
+    image: ""
   };
 
   searchBooks = (search: string) => {
       console.log("This is the search being passed: " + search);
       API.search(search)
-      .then(res => 
-        // this.setState({ results: res.data })
-        console.log(res.data)
+      .then(results => 
+        results.data.items.filter(
+          (          result: { volumeInfo: { title: any; description: any; imageLinks: any;}; }) => 
+          this.state.results.push(result.volumeInfo.title)
+          // result.volumeInfo.description, 
+          // result.volumeInfo.imageLinks
+
         )
-      .catch(err => console.log(err));
-    //   console.log(this.state.results)
-    //   console.log(API);
+        // this.setState({ results: res.data })
+        )
+
+      // .catch(err => console.log(err));
+      console.log(this.state.results);
   }
 
   handleInputChange = (event: { target: { name: any; value: any } }) => {
@@ -41,6 +66,12 @@ class Search extends Component {
     this.searchBooks(search);
     console.log("Search:" + this.state.search);
   };
+
+  // renderBooks = () => {
+  //   console.log(this.state.results);
+  //   return this.state.results;
+  // }
+
 
   render() {
     const { search } = this.state;
