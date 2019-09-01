@@ -4,23 +4,24 @@ import { SearchBar } from "../../components/SearchBar";
 import API from "../../utils/API";
 
 interface IContent {
- title: string, 
- description: string,
- image: string
+  volumeInfo: any;
+  title: string;
+  description: string;
+  image: string;
 }
 
 interface IBook {
-  books: IContent[], 
-  title: string, 
-  description: string,
-  image: string,
-  search: string
+  books: IContent[];
+  title: string;
+  description: string;
+  image: string;
+  search: string;
 }
 
 // interface IProps {
 //   results: IBook[];
 //   search: string;
-//   title: string, 
+//   title: string,
 //   description: string,
 //   image: string
 // }
@@ -28,52 +29,55 @@ class Search extends Component {
   state: IBook = {
     books: [],
     search: "",
-    title: "", 
+    title: "",
     description: "",
     image: ""
   };
 
+  // componentDidMount() {
+  //   this.searchBooks("harry potter");
+  // }
+
   searchBooks = (search: string) => {
-      console.log("This is the search being passed: " + search);
-      API.search(search)
-      .then(results => 
-        results.data.items.filter(
-          (          result: { volumeInfo: { title: any; description: any; imageLinks: any;}; }) => 
-          this.state.books.push({ title: result.volumeInfo.title, description: result.volumeInfo.description, image: result.volumeInfo.imageLinks})
-          // result.volumeInfo.description, 
-          // result.volumeInfo.imageLinks
-
-        )
-        // this.setState({ results: res.data })
-        )
-
-      // .catch(err => console.log(err));
-      console.log(this.state.books);
-  }
+    console.log("This is the search being passed: " + search);
+    API.search(search).then(res =>
+      this.setState({ books: res.data.items })
+    );
+    console.log(this.state.books);
+  };
 
   handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-    console.log({ [name]: value })
+    console.log({ [name]: value });
   };
 
   handleFormSearch = (event: { preventDefault: () => void }) => {
     const { search } = this.state;
 
     event.preventDefault();
-    this.setState({ search: search});
+    this.setState({ search: search });
     this.searchBooks(search);
     console.log("Search:" + this.state.search);
   };
 
-  // renderBooks = () => {
-  //   console.log(this.state.results);
-  //   return this.state.results;
-  // }
+  renderBooks() {
+    const { books } = this.state;
+    console.log("Books: ", books);
 
-
+    const allBooks = books.map((item, index) => {
+      return (
+        <li key={index}>
+          <p>{item.volumeInfo.title}</p>
+          <p>{item.volumeInfo.description}</p>
+          <p>{item.volumeInfo.image}</p>
+        </li>
+      );
+    });
+    return <ul>{allBooks}</ul>;
+  }
   render() {
     const { search } = this.state;
 
@@ -89,6 +93,10 @@ class Search extends Component {
           handleInputChange={this.handleInputChange}
           handleFormSearch={this.handleFormSearch}
         />
+
+        <div>
+          <div id="renderBooks">{this.renderBooks()}</div>
+        </div>
       </div>
     );
   }
