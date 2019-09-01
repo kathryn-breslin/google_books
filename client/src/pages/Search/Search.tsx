@@ -18,13 +18,6 @@ interface IBook {
   search: string;
 }
 
-// interface IProps {
-//   results: IBook[];
-//   search: string;
-//   title: string,
-//   description: string,
-//   image: string
-// }
 class Search extends Component {
   state: IBook = {
     books: [],
@@ -33,10 +26,6 @@ class Search extends Component {
     description: "",
     image: ""
   };
-
-  // componentDidMount() {
-  //   this.searchBooks("harry potter");
-  // }
 
   searchBooks = (search: string) => {
     console.log("This is the search being passed: " + search);
@@ -72,7 +61,7 @@ class Search extends Component {
         <li key={index}>
           <p>{item.volumeInfo.title}</p>
           <p>{item.volumeInfo.description}</p>
-          <p>{item.volumeInfo.image}</p>
+          <p>{item.volumeInfo.imageLinks.smallThumbnail}</p>
         </li>
       );
     });
