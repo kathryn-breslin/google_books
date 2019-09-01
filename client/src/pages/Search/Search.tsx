@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { SearchBar } from "../../components/SearchBar";
+import { SearchBar } from "../../components";
 import API from "../../utils/API";
 
 interface IContent {
@@ -58,14 +58,14 @@ class Search extends Component {
 
     const allBooks = books.map((item, index) => {
       return (
-        <li key={index}>
+        <li className="list-group-item" key={index}>
           <p>{item.volumeInfo.title}</p>
           <p>{item.volumeInfo.description}</p>
-          <p>{item.volumeInfo.imageLinks.smallThumbnail}</p>
+          <img alt={item.volumeInfo.title} src={item.volumeInfo.imageLinks.smallThumbnail}/>
         </li>
       );
     });
-    return <ul>{allBooks}</ul>;
+    return <ul className="list-group">{allBooks}</ul>;
   }
   render() {
     const { search } = this.state;
@@ -82,9 +82,12 @@ class Search extends Component {
           handleInputChange={this.handleInputChange}
           handleFormSearch={this.handleFormSearch}
         />
-
-        <div>
-          <div id="renderBooks">{this.renderBooks()}</div>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <>{this.renderBooks()}</>
+            </div>
+          </div>
         </div>
       </div>
     );
