@@ -5,6 +5,7 @@ import API from "../../utils/API";
 
 interface IContent {
   volumeInfo: any;
+  id: any;
   title: string;
   description: string;
   image: string;
@@ -29,9 +30,7 @@ class Search extends Component {
 
   searchBooks = (search: string) => {
     console.log("This is the search being passed: " + search);
-    API.search(search).then(res =>
-      this.setState({ books: res.data.items })
-    );
+    API.search(search).then(res => this.setState({ books: res.data.items }));
     console.log(this.state.books);
   };
 
@@ -48,59 +47,67 @@ class Search extends Component {
 
     event.preventDefault();
     this.setState({ search: search });
+
     this.searchBooks(search);
     console.log("Search:" + this.state.search);
   };
 
-  // renderBooks() {
-  //   const { books } = this.state;
-  //   console.log("Books: ", books);
+  saveBook = (item: any) => {
+    // const { books } = this.state;
+    console.log("Save book!");
+    console.log("Item: " + item.volumeInfo.previewLink);
+    API.saveBook({ 
+      title: item.volumeInfo.title, 
+      authors: item.volumeInfo.authors, 
+      description: item.volumeInfo.description, 
+      image: item.volumeInfo.imageLinks.smallThumbnail, 
+      link: item.volumeInfo.previewLink
+    })
+    .then(res => console.log("Saved Book: " + res))
+    .catch(err => console.log(err));
+  };
 
-  //   const allBooks = books.map((item, index) => {
-  //     return (
-  //       <li className="list-group-item" key={index}>
-  //         <img alt={item.volumeInfo.title} src={item.volumeInfo.imageLinks.smallThumbnail}/>
-  //         <div>          
-  //           <h1>{item.volumeInfo.title}</h1>
-  //           <p>{item.volumeInfo.description}</p></div>
-  //       </li>
-  //     );
-  //   });
-  //   return <ul className="list-group">{allBooks}</ul>;
-  // }
   render() {
     const { search, books } = this.state;
 
     return (
       <div>
-        <Link to="/saved">
-          <h1>Saved</h1>
-        </Link>
         <h1>Search Page</h1>
 
-        <SearchBar
-          search={search}
-          handleInputChange={this.handleInputChange}
-          handleFormSearch={this.handleFormSearch}
-        />
+        <nav className="navbar navbar-light bg-light">
+          <Link to="/saved">
+            <h1>Saved</h1>
+          </Link>
+          <SearchBar
+            search={search}
+            handleInputChange={this.handleInputChange}
+            handleFormSearch={this.handleFormSearch}
+          />
+        </nav>
         <div className="container">
           <div className="row">
             <div className="col-12">
-              {/* <>{this.renderBooks()}</> */}
               {books.length ? (
                 <Books>
-                  {books.map(item=> (
+                  {books.map(item => (
                     <BookItem>
-                        <img alt={item.volumeInfo.title} src={item.volumeInfo.imageLinks.smallThumbnail}/>
-                          <div>          
-                              <h1>{item.volumeInfo.title}</h1>
-                              <p>{item.volumeInfo.description}</p>
-                          </div>
+                      <img
+                        alt={item.volumeInfo.title}
+                        src={item.volumeInfo.imageLinks.smallThumbnail}
+                      />
+                      <div>
+                        <h1>{item.volumeInfo.title}</h1>
+
+                        <p>{item.volumeInfo.description}</p>
+                        <p>{item.volumeInfo.previewLink}</p>
+                        <br/>
+                      </div>
+                      <button onClick={() => this.saveBook(item)}>Save Book</button>
                     </BookItem>
                   ))}
                 </Books>
-              ): (
-                <h1>No Books</h1>
+              ) : (
+                <h3>Search for Books!</h3>
               )}
             </div>
           </div>
