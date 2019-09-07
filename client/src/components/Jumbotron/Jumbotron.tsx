@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Jumbotron.css";
 function Jumbotron (props: any) {
     return (
         <div className="jumbotron text-center">
