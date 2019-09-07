@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { SearchBar, Books, BookItem } from "../../components";
+import { Jumbotron, SearchBar, Books, BookItem } from "../../components";
 import API from "../../utils/API";
 
 interface IContent {
@@ -56,16 +56,16 @@ class Search extends Component {
     // const { books } = this.state;
     console.log("Save book!");
     console.log("Item: " + item.volumeInfo.previewLink);
-    API.saveBook({ 
-      title: item.volumeInfo.title, 
-      authors: item.volumeInfo.authors, 
-      description: item.volumeInfo.description, 
-      image: item.volumeInfo.imageLinks.smallThumbnail, 
-      link: item.volumeInfo.previewLink, 
+    API.saveBook({
+      title: item.volumeInfo.title,
+      authors: item.volumeInfo.authors,
+      description: item.volumeInfo.description,
+      image: item.volumeInfo.imageLinks.smallThumbnail,
+      link: item.volumeInfo.previewLink,
       saved: true
     })
-    .then(res => console.log("Saved Book: " + res))
-    .catch(err => console.log(err));
+      .then(res => console.log("Saved Book: " + res))
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -73,11 +73,9 @@ class Search extends Component {
 
     return (
       <div>
-        <h1>Search Page</h1>
-
         <nav className="navbar navbar-light bg-light">
           <Link to="/saved">
-            <h1>Saved</h1>
+            <p>Saved</p>
           </Link>
           <SearchBar
             search={search}
@@ -85,6 +83,7 @@ class Search extends Component {
             handleFormSearch={this.handleFormSearch}
           />
         </nav>
+        <Jumbotron />
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -101,9 +100,11 @@ class Search extends Component {
 
                         <p>{item.volumeInfo.description}</p>
                         <p>{item.volumeInfo.previewLink}</p>
-                        <br/>
+                        <br />
                       </div>
-                      <button onClick={() => this.saveBook(item)}>Save Book</button>
+                      <button onClick={() => this.saveBook(item)}>
+                        Save Book
+                      </button>
                     </BookItem>
                   ))}
                 </Books>

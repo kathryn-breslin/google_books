@@ -9,18 +9,17 @@ const SearchBar = ({ search, handleInputChange, handleFormSearch }: IProps) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <form>
-        <div className="form-group">
-          <label htmlFor="search">Search</label>
+        <div className="form-inline searchBar">
           <input
             onChange={handleInputChange}
             value={search}
             name="search"
             type="text"
-            className="form-control"
+            className="form-control mr-sm-2"
             placeholder="Harry Potter"
             id="search"
           />
-          <button onClick={handleFormSearch} className="btn btn-primary">
+          <button onClick={handleFormSearch} className="btn btn-outline-success my-2 my-sm-0">
             Search
           </button>
         </div>
