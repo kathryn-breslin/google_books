@@ -36,6 +36,13 @@ class Saved extends Component {
       .then(res => this.setState({ savedBooks: res.data }))
       .catch(err => console.log(err));
   };
+
+  deleteBook = (saved: any) => {
+    API.deleteBook(saved._id)
+    .then(res => this.loadSaved())
+    .catch(err => console.log(err));
+
+  }
   render() {
       const { savedBooks } = this.state;
     return (
@@ -63,12 +70,12 @@ class Saved extends Component {
                         <p>{saved.link}</p>
                         <br/>
                       </div>
-                      {/* <button onClick={() => this.saveBook(item)}>Save Book</button> */}
+                      <button onClick={() => this.deleteBook(saved)}>Delete</button>
                     </BookItem>
                   ))}
                 </Books>
               ) : (
-                <h3>Search for Books!</h3>
+                <h3>No Saved Books.</h3>
               )}
             </div>
           </div>
