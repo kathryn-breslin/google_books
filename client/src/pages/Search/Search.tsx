@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Jumbotron, SearchBar, Books, BookItem } from "../../components";
 import API from "../../utils/API";
+import "./Search.css";
 
 interface IContent {
   volumeInfo: any;
@@ -72,7 +73,7 @@ class Search extends Component {
     const { search, books } = this.state;
 
     return (
-      <div>
+      <div id="searchDiv">
         <nav className="navbar navbar-light bg-light">
           <Link to="/saved">
             <p>Saved</p>
@@ -102,14 +103,14 @@ class Search extends Component {
                         <p>{item.volumeInfo.previewLink}</p>
                         <br />
                       </div>
-                      <button onClick={() => this.saveBook(item)}>
+                      <button className="btn btn-outline-info" onClick={() => this.saveBook(item)}>
                         Save Book
                       </button>
                     </BookItem>
                   ))}
                 </Books>
               ) : (
-                <h3>Search for Books!</h3>
+                <h3 id="search">Search for Books!</h3>
               )}
             </div>
           </div>

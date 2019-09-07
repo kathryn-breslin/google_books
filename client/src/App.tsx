@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Search from "../src/pages/Search";
 import Saved from "../src/pages/Saved";
+import "./App.css";
 
 const App: React.FC = () => {
   return (
