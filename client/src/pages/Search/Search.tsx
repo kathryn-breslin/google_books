@@ -61,7 +61,8 @@ class Search extends Component {
       authors: item.volumeInfo.authors, 
       description: item.volumeInfo.description, 
       image: item.volumeInfo.imageLinks.smallThumbnail, 
-      link: item.volumeInfo.previewLink
+      link: item.volumeInfo.previewLink, 
+      saved: true
     })
     .then(res => console.log("Saved Book: " + res))
     .catch(err => console.log(err));
