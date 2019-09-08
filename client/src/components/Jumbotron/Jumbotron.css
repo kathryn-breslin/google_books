@@ -1,3 +1,10 @@
 .jumbotron {
     background: none;
+    font-family: 'Modak', cursive;
+    color: #F6BC09;
+    font-size: 100px;
+}
+
+.jumbotron h1 {
+    font-size: 100px;
 }

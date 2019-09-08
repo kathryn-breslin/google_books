@@ -73,18 +73,27 @@ class Search extends Component {
     const { search, books } = this.state;
 
     return (
-      <div id="searchDiv">
-        <nav className="navbar navbar-light bg-light">
+      <div>
+        <div id="searchDiv">
+          {/* <nav className="navbar navbar-light bg-light"> */}
           <Link to="/saved">
             <p>Saved</p>
           </Link>
-          <SearchBar
+          {/* <SearchBar
             search={search}
             handleInputChange={this.handleInputChange}
             handleFormSearch={this.handleFormSearch}
-          />
-        </nav>
-        <Jumbotron />
+          /> */}
+          {/* </nav> */}
+          <Jumbotron />
+          <div className="row">
+              <SearchBar
+                search={search}
+                handleInputChange={this.handleInputChange}
+                handleFormSearch={this.handleFormSearch}
+              />
+          </div>
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -103,7 +112,10 @@ class Search extends Component {
                         <p>{item.volumeInfo.previewLink}</p>
                         <br />
                       </div>
-                      <button className="btn btn-outline-info" onClick={() => this.saveBook(item)}>
+                      <button
+                        className="btn btn-outline-info"
+                        onClick={() => this.saveBook(item)}
+                      >
                         Save Book
                       </button>
                     </BookItem>

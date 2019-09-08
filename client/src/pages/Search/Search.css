@@ -3,5 +3,8 @@
 }
 
 #searchDiv {
-    background-color: #0943f6;
+    width: 100%;
+    text-align:center;
+    margin: 0 auto;
+    display: block;
 }

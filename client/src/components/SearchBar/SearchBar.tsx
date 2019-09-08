@@ -1,4 +1,5 @@
 import React from "react";
+import "./SearchBar.css";
 
 interface IProps {
   search: string;
@@ -7,7 +8,7 @@ interface IProps {
 }
 const SearchBar = ({ search, handleInputChange, handleFormSearch }: IProps) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg" id="nav">
       <form>
         <div className="form-inline searchBar">
           <input
@@ -15,11 +16,16 @@ const SearchBar = ({ search, handleInputChange, handleFormSearch }: IProps) => {
             value={search}
             name="search"
             type="text"
-            className="form-control mr-sm-2"
+            className="form-control"
             placeholder="Harry Potter"
             id="search"
           />
-          <button onClick={handleFormSearch} className="btn btn-outline-success my-2 my-sm-0">
+        </div>
+        <div id="submit">
+          <button
+            onClick={handleFormSearch}
+            className="btn btn-outline-warning btn-block"
+          >
             Search
           </button>
         </div>

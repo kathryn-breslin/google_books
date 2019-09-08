@@ -1,0 +1,10 @@
+.navbar {
+    /* width: 100%;
+    text-align:center; */
+    margin: 0 auto;
+    display: block;
+}
+
+#submit {
+    margin-top: 5px;
+}
