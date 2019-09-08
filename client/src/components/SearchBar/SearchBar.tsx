@@ -10,7 +10,7 @@ const SearchBar = ({ search, handleInputChange, handleFormSearch }: IProps) => {
   return (
     <nav className="navbar navbar-expand-lg" id="nav">
       <form>
-        <div className="form-inline searchBar">
+        <div className="input-group">
           <input
             onChange={handleInputChange}
             value={search}
