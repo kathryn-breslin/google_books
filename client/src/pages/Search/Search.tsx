@@ -75,23 +75,16 @@ class Search extends Component {
     return (
       <div>
         <div id="searchDiv">
-          {/* <nav className="navbar navbar-light bg-light"> */}
           <Link to="/saved">
             <p>Saved</p>
           </Link>
-          {/* <SearchBar
-            search={search}
-            handleInputChange={this.handleInputChange}
-            handleFormSearch={this.handleFormSearch}
-          /> */}
-          {/* </nav> */}
           <Jumbotron />
           <div className="row">
-              <SearchBar
-                search={search}
-                handleInputChange={this.handleInputChange}
-                handleFormSearch={this.handleFormSearch}
-              />
+            <SearchBar
+              search={search}
+              handleInputChange={this.handleInputChange}
+              handleFormSearch={this.handleFormSearch}
+            />
           </div>
         </div>
         <div className="container">
@@ -100,25 +93,44 @@ class Search extends Component {
               {books.length ? (
                 <Books>
                   {books.map(item => (
-                    <BookItem>
-                      <img
-                        alt={item.volumeInfo.title}
-                        src={item.volumeInfo.imageLinks.smallThumbnail}
-                      />
-                      <div>
-                        <h1>{item.volumeInfo.title}</h1>
-
-                        <p>{item.volumeInfo.description}</p>
-                        <p>{item.volumeInfo.previewLink}</p>
-                        <br />
+                    // <BookItem>
+                      <div className="card sm-3">
+                        <div className="row no-gutters">
+                          <div className="col-sm-4">
+                            <img
+                              src={item.volumeInfo.imageLinks.thumbnail}
+                              className="card-img"
+                              alt={item.volumeInfo.title}
+                            />
+                          </div>
+                          <div className="col-sm-8">
+                            <div className="card-body">
+                              <h5 className="card-title">
+                                {item.volumeInfo.title}
+                              </h5>
+                              <p className="card-text">
+                                {item.volumeInfo.description}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="card-footer bg-transparent">
+                          <a href={item.volumeInfo.previewLink} target="_blank">
+                        <button type="button" 
+                            className="btn btn-outline-warning"
+                           >
+                            More
+                          </button>
+                          </a>
+                          <button
+                            className="btn btn-outline-warning"
+                            onClick={() => this.saveBook(item)}
+                          >
+                            Save Book
+                          </button>
+                        </div>
                       </div>
-                      <button
-                        className="btn btn-outline-info"
-                        onClick={() => this.saveBook(item)}
-                      >
-                        Save Book
-                      </button>
-                    </BookItem>
+                    // </BookItem>
                   ))}
                 </Books>
               ) : (

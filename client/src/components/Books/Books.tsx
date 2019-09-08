@@ -1,4 +1,5 @@
 import React from "react";
+import "./Books.css";
 
 interface IProps {
     children: React.ReactNode;
@@ -8,7 +9,7 @@ interface IProps {
 function Books({ children }: IProps) {
     return (
         <div className="list-overflow-container">
-            <ul className="list-group">{children}</ul>
+            <ul className="list-group d-flex">{children}</ul>
         </div>
     );
 }

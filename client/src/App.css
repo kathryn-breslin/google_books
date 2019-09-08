@@ -1,5 +1,6 @@
 body {
-    background-image: linear-gradient(#0943f6, white);
+    background-color: #0943f6;
+    /* background-image: linear-gradient(#0943f6, white); */
     background-repeat: no-repeat;
     background-size: cover;
 }

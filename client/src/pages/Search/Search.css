@@ -5,6 +5,19 @@
 #searchDiv {
     width: 100%;
     text-align:center;
+
+}
+
+.card {
+    /* margin: 10px; */
+    max-width: 700px;
+    display: inline-block; 
     margin: 0 auto;
-    display: block;
+    margin-top: 10px;
+    margin-botton: 10px;
+
+}
+
+.card-footer button{
+    float: right;
 }
