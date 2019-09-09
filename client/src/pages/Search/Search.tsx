@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Jumbotron, SearchBar, Books, BookItem } from "../../components";
+import { Jumbotron, SearchBar, Books } from "../../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArchive } from "@fortawesome/free-solid-svg-icons";
 import API from "../../utils/API";
 import "./Search.css";
 
@@ -75,15 +77,19 @@ class Search extends Component {
     return (
       <div>
         <div id="searchDiv">
-          <Link to="/saved">
-            <p>Saved</p>
-          </Link>
-          <Jumbotron/>
+          <div className="row">
+            <div className="col-11" id="font">
+              <Link to="/saved">
+                <FontAwesomeIcon icon={faArchive} size="2x" color="white" />
+              </Link>
+            </div>
+          </div>
+          <Jumbotron />
           <SearchBar
-              search={search}
-              handleInputChange={this.handleInputChange}
-              handleFormSearch={this.handleFormSearch}
-            />
+            search={search}
+            handleInputChange={this.handleInputChange}
+            handleFormSearch={this.handleFormSearch}
+          />
         </div>
         <div className="container">
           <div className="row">
