@@ -85,11 +85,17 @@ class Search extends Component {
             </div>
           </div>
           <Jumbotron />
-          <SearchBar
-            search={search}
-            handleInputChange={this.handleInputChange}
-            handleFormSearch={this.handleFormSearch}
-          />
+          <div className="row">
+            <div className="col-1"></div>
+            <div className="col-10">
+              <SearchBar
+                search={search}
+                handleInputChange={this.handleInputChange}
+                handleFormSearch={this.handleFormSearch}
+              />
+            </div>
+            <div className="col-1"></div>
+          </div>
         </div>
         <div className="container">
           <div className="row">
