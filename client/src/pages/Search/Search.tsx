@@ -79,18 +79,26 @@ class Search extends Component {
     return (
       <div>
         <div id="searchDiv">
-          <SearchBar
+          {/* <SearchBar
             search={search}
             handleInputChange={this.handleInputChange}
             handleFormSearch={this.handleFormSearch}
-          >
-            <button className="btn btn-outline-primary my-2 my-sm-0">
-              <Link to="/saved">Saved</Link>
-            </button>
-          </SearchBar>
+          > */}
+          <button className="btn btn-outline-primary my-2 my-sm-0">
+            <Link to="/saved">Saved</Link>
+          </button>
+          {/* </SearchBar> */}
         </div>
         <Jumbotron>
-          <h2>Google Books Search</h2>
+          <div className="overlay"></div>
+          <div className="content">
+            <h2>Google Books Search</h2>
+            <SearchBar
+              search={search}
+              handleInputChange={this.handleInputChange}
+              handleFormSearch={this.handleFormSearch}
+            />
+          </div>
         </Jumbotron>
         <div className="container">
           <div className="row">
@@ -120,7 +128,11 @@ class Search extends Component {
                         </div>
                       </div>
                       <div className="card-footer bg-transparent">
-                        <a href={item.volumeInfo.previewLink} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={item.volumeInfo.previewLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <button
                             type="button"
                             className="btn btn-outline-warning"
@@ -140,7 +152,7 @@ class Search extends Component {
                   ))}
                 </Books>
               ) : (
-                <h3 id="search">Search for Books!</h3>
+                <h3 id="search">Search for Books</h3>
               )}
             </div>
           </div>

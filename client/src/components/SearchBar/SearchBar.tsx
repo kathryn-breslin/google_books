@@ -4,12 +4,11 @@ import "./SearchBar.css";
 
 interface IProps {
   search: string;
-  children: any;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleFormSearch: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const SearchBar = ({ search, handleInputChange, handleFormSearch, children }: IProps) => {
+const SearchBar = ({ search, handleInputChange, handleFormSearch}: IProps) => {
   return (
     <nav className="navbar navbar-expand-lg" id="nav">
       <form className="form-inline my-2 my-lg-0">
@@ -30,7 +29,6 @@ const SearchBar = ({ search, handleInputChange, handleFormSearch, children }: IP
         >
           Search
         </button>
-        {children}
       </form>
     </nav>
   );

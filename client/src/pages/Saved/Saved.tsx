@@ -62,7 +62,6 @@ class Saved extends Component {
               {savedBooks.length ? (
                 <Books>
                   {savedBooks.map(saved => (
-                    // <BookItem>
                     <div className="card sm-4">
                       <div className="row no-gutters">
                         <div className="col-sm-4">
@@ -100,7 +99,6 @@ class Saved extends Component {
                         </button>
                       </div>
                     </div>
-                    // </BookItem>
                   ))}
                 </Books>
               ) : (
