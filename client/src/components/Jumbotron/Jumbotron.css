@@ -21,10 +21,13 @@
 .jumbotron > .content {
     position: relative;
     z-index: 2;
+    font-family: 'Londrina Outline', cursive;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
-/* .jumbotron h1 {
-    font-size: 100px;
-    margin-bottom: 0;
 
-} */
+h2 {
+    font-size: 100px;
+}
 

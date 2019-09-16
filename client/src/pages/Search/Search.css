@@ -1,6 +1,7 @@
 #searchDiv {
     text-align: right;
-    margin-right: 20px;
+    background-color: black;
+    padding: 15px;
 }
 
 .card {

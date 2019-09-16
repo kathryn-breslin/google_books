@@ -1,1 +1,5 @@
-
+#search, #button{
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+}

@@ -47,15 +47,18 @@ class Saved extends Component {
     const { savedBooks } = this.state;
     return (
       <div>
-        <div id="savedDiv">
-          <button className="btn btn-outline-primary my-2 my-sm-0">
-            <Link to="/">Search</Link>
+        <div id="searchDiv">
+          <button className="btn btn-outline-light my-2 my-sm-0">
+            <Link style={{ textDecoration: 'none', color: 'white' }} to="/">Search</Link>
           </button>
         </div>
         <Jumbotron>
-          <h2>Saved Books</h2>
+          <div className="overlay"></div>
+          <div className="content">
+            <h2>Saved Books</h2>
+          </div>
         </Jumbotron>
-        
+
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -73,17 +76,17 @@ class Saved extends Component {
                         </div>
                         <div className="col-sm-8">
                           <div className="card-body">
-                            <h5 className="card-title">
-                              {saved.title}
-                            </h5>
-                            <p className="card-text">
-                              {saved.description}
-                            </p>
+                            <h5 className="card-title">{saved.title}</h5>
+                            <p className="card-text">{saved.description}</p>
                           </div>
                         </div>
                       </div>
                       <div className="card-footer bg-transparent">
-                        <a href={saved.link} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={saved.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <button
                             type="button"
                             className="btn btn-outline-warning"

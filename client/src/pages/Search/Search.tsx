@@ -79,15 +79,9 @@ class Search extends Component {
     return (
       <div>
         <div id="searchDiv">
-          {/* <SearchBar
-            search={search}
-            handleInputChange={this.handleInputChange}
-            handleFormSearch={this.handleFormSearch}
-          > */}
-          <button className="btn btn-outline-primary my-2 my-sm-0">
-            <Link to="/saved">Saved</Link>
+          <button className="btn btn-outline-light my-2 my-sm-0">
+            <Link style={{ textDecoration: 'none', color: 'white' }} to="/saved">Saved</Link>
           </button>
-          {/* </SearchBar> */}
         </div>
         <Jumbotron>
           <div className="overlay"></div>

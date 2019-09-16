@@ -24,8 +24,9 @@ const SearchBar = ({ search, handleInputChange, handleFormSearch}: IProps) => {
         />
         <button
           onClick={handleFormSearch}
-          className="btn btn-outline-success my-2 my-sm-0"
+          className="btn btn-outline-light my-2 my-sm-0"
           type="submit"
+          id="button"
         >
           Search
         </button>
