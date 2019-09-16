@@ -2,6 +2,10 @@
 
 Google Books Search is a MERN stack app built with the Google Books API.
 
+![GoogleBooksSearch](assets/images/googlebooksOne.png)
+![GoogleBooksSearch](assets/images/googlebooksTwo.png)
+
+
 ### Technologies
 
 - React
