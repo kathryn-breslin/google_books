@@ -1,10 +1,14 @@
 .jumbotron {
-    background-color: #079EF8;
+    background: none;
     font-family: 'Modak', cursive;
+    /* font-family: 'Londrina Outline', cursive; */
     color: #f86107;
     font-size: 100px;
+    margin-bottom: 0;
 }
 
 .jumbotron h1 {
     font-size: 100px;
+    margin-bottom: 0;
+
 }

@@ -33,7 +33,9 @@ class Search extends Component {
 
   searchBooks = (search: string) => {
     console.log("This is the search being passed: " + search);
-    API.search(search).then(res => this.setState({ books: res.data.items }));
+    API.search(search).then(res =>
+      this.setState({ books: res.data.items, search: "" })
+    );
     console.log(this.state.books);
   };
 
@@ -77,26 +79,19 @@ class Search extends Component {
     return (
       <div>
         <div id="searchDiv">
-          <div className="row">
-            <div className="col-11" id="font">
-              <Link to="/saved">
-                <FontAwesomeIcon icon={faArchive} size="2x" color="white" />
-              </Link>
-            </div>
-          </div>
-          <Jumbotron />
-          <div className="row">
-            <div className="col-1"></div>
-            <div className="col-10">
-              <SearchBar
-                search={search}
-                handleInputChange={this.handleInputChange}
-                handleFormSearch={this.handleFormSearch}
-              />
-            </div>
-            <div className="col-1"></div>
-          </div>
+          <SearchBar
+            search={search}
+            handleInputChange={this.handleInputChange}
+            handleFormSearch={this.handleFormSearch}
+          >
+            <button className="btn btn-outline-primary my-2 my-sm-0">
+              <Link to="/saved">Saved</Link>
+            </button>
+          </SearchBar>
         </div>
+        <Jumbotron>
+          <h2>Google Books Search</h2>
+        </Jumbotron>
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -104,7 +99,7 @@ class Search extends Component {
                 <Books>
                   {books.map(item => (
                     // <BookItem>
-                    <div className="card sm-3">
+                    <div className="card sm-4">
                       <div className="row no-gutters">
                         <div className="col-sm-4">
                           <img
@@ -125,7 +120,7 @@ class Search extends Component {
                         </div>
                       </div>
                       <div className="card-footer bg-transparent">
-                        <a href={item.volumeInfo.previewLink} target="_blank">
+                        <a href={item.volumeInfo.previewLink} target="_blank" rel="noopener noreferrer">
                           <button
                             type="button"
                             className="btn btn-outline-warning"

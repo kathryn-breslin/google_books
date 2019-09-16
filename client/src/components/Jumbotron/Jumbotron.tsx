@@ -1,9 +1,14 @@
 import React from "react";
 import "./Jumbotron.css";
-function Jumbotron (props: any) {
+
+interface IProps {
+    children: any;
+  }
+
+const Jumbotron = ({children}: IProps) => {
     return (
         <div className="jumbotron text-center">
-            <h1>Google Book Search</h1>
+            {children}
         </div>
     )
 }

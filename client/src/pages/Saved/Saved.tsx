@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Books, BookItem } from "../../components";
+import { Jumbotron, Books } from "../../components";
 import API from "../../utils/API";
+import "./Saved.css";
 
 interface IContent {
   volumeInfo: any;
@@ -39,43 +40,71 @@ class Saved extends Component {
 
   deleteBook = (saved: any) => {
     API.deleteBook(saved._id)
-    .then(res => this.loadSaved())
-    .catch(err => console.log(err));
-
-  }
+      .then(res => this.loadSaved())
+      .catch(err => console.log(err));
+  };
   render() {
-      const { savedBooks } = this.state;
+    const { savedBooks } = this.state;
     return (
       <div>
-        <Link to="/">
-          <h1>Search</h1>
-        </Link>
-        <h1>Saved Page</h1>
-
+        <div id="savedDiv">
+          <button className="btn btn-outline-primary my-2 my-sm-0">
+            <Link to="/">Search</Link>
+          </button>
+        </div>
+        <Jumbotron>
+          <h2>Saved Books</h2>
+        </Jumbotron>
+        
         <div className="container">
           <div className="row">
             <div className="col-12">
               {savedBooks.length ? (
                 <Books>
                   {savedBooks.map(saved => (
-                    <BookItem>
-                      <img
-                        alt={saved.title}
-                        src={saved.image}
-                      />
-                      <div>
-                        <h1>{saved.title}</h1>
-
-                        <p>{saved.description}</p>
-                        <p>{saved.link}</p>
-                        <br/>
+                    // <BookItem>
+                    <div className="card sm-4">
+                      <div className="row no-gutters">
+                        <div className="col-sm-4">
+                          <img
+                            alt={saved.title}
+                            src={saved.image}
+                            className="card-img"
+                          />
+                        </div>
+                        <div className="col-sm-8">
+                          <div className="card-body">
+                            <h5 className="card-title">
+                              {saved.title}
+                            </h5>
+                            <p className="card-text">
+                              {saved.description}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <button onClick={() => this.deleteBook(saved)}>Delete</button>
-                    </BookItem>
+                      <div className="card-footer bg-transparent">
+                        <a href={saved.link} target="_blank" rel="noopener noreferrer">
+                          <button
+                            type="button"
+                            className="btn btn-outline-warning"
+                          >
+                            More
+                          </button>
+                        </a>
+                        <button
+                          className="btn btn-outline-warning"
+                          onClick={() => this.deleteBook(saved)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                    // </BookItem>
                   ))}
                 </Books>
               ) : (
-                <h3>No Saved Books.</h3>
+                <h3 id="search">No Saved Books</h3>
               )}
             </div>
           </div>
