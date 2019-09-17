@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Jumbotron, SearchBar, Books } from "../../components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArchive } from "@fortawesome/free-solid-svg-icons";
+// import * as swal from 'sweetalert';
 import API from "../../utils/API";
 import "./Search.css";
 
@@ -28,7 +27,7 @@ class Search extends Component {
     search: "",
     title: "",
     description: "",
-    image: ""
+    image: "", 
   };
 
   searchBooks = (search: string) => {
@@ -58,7 +57,6 @@ class Search extends Component {
   };
 
   saveBook = (item: any) => {
-    // const { books } = this.state;
     console.log("Save book!");
     console.log("Item: " + item.volumeInfo.previewLink);
     API.saveBook({
@@ -69,7 +67,9 @@ class Search extends Component {
       link: item.volumeInfo.previewLink,
       saved: true
     })
-      .then(res => console.log("Saved Book: " + res))
+    
+      .then(res => 
+        console.log("Saved Book: " + res))
       .catch(err => console.log(err));
   };
 
