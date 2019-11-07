@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Jumbotron, SearchBar, Books } from "../../components";
-// import * as swal from 'sweetalert';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import API from "../../utils/API";
 import "./Search.css";
 
@@ -21,13 +22,41 @@ interface IBook {
   search: string;
 }
 
+const toastList = new Set();
+const MAX_TOAST = 3;
+
+function notify() {
+  let toastIdToDismiss: any = null;
+
+  if (toastList.size === MAX_TOAST) {
+    const arr = Array.from(toastList);
+    const toastId = arr[0];
+
+    if (toastId) {
+      toastIdToDismiss = toastId;
+    }
+  }
+
+  const id: any = toast("This book has been saved!", {
+    onClose: () => toastList.delete(id),
+    onOpen: () => {
+      if (toastIdToDismiss !== null) {
+        setTimeout(() => {
+          toast.dismiss(toastIdToDismiss);
+        }, 1000);
+      }
+    }
+  });
+  toastList.add(id);
+}
+
 class Search extends Component {
   state: IBook = {
     books: [],
     search: "",
     title: "",
     description: "",
-    image: "", 
+    image: ""
   };
 
   searchBooks = (search: string) => {
@@ -67,9 +96,8 @@ class Search extends Component {
       link: item.volumeInfo.previewLink,
       saved: true
     })
-    
-      .then(res => 
-        console.log("Saved Book: " + res))
+
+      .then(res => console.log("Saved Book: " + res))
       .catch(err => console.log(err));
   };
 
@@ -80,7 +108,12 @@ class Search extends Component {
       <div>
         <div id="searchDiv">
           <button className="btn btn-outline-light my-2 my-sm-0">
-            <Link style={{ textDecoration: 'none', color: 'white' }} to="/saved">Saved</Link>
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to="/saved"
+            >
+              Saved
+            </Link>
           </button>
         </div>
         <Jumbotron>
@@ -136,10 +169,23 @@ class Search extends Component {
                         </a>
                         <button
                           className="btn btn-outline-warning"
-                          onClick={() => this.saveBook(item)}
+                          onClick={() => {
+                            notify();
+                            this.saveBook(item);
+                          }}
                         >
                           Save Book
                         </button>
+
+                        <ToastContainer
+                          position="top-right"
+                          hideProgressBar={false}
+                          // autoClose={false}
+                          newestOnTop={true}
+                          closeOnClick={true}
+                          draggable={false}
+                          rtl={false}
+                        />
                       </div>
                     </div>
                     // </BookItem>
