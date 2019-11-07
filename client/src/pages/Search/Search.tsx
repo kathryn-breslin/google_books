@@ -20,6 +20,7 @@ interface IBook {
   description: string;
   image: string;
   search: string;
+  noResponse: string;
 }
 
 const toastList = new Set();
@@ -56,16 +57,28 @@ class Search extends Component {
     search: "",
     title: "",
     description: "",
-    image: ""
+    image: "", 
+    noResponse: ""
   };
 
   searchBooks = (search: string) => {
     console.log("This is the search being passed: " + search);
-    API.search(search).then(res =>
-      this.setState({ books: res.data.items, search: "" })
-    );
+    API.search(search).then(res => {
+      if (!res.data.length) {
+        console.log("No Responses!")
+        this.noBooks();
+        this.setState({ search: ""})
+      
+      } else {
+        this.setState({ books: res.data.items, search: "" });
+      }
+    });
     console.log(this.state.books);
   };
+
+  noBooks = () => {
+    alert("No Books for this search. Please try again!")
+  }
 
   handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -132,6 +145,7 @@ class Search extends Component {
             <div className="col-12">
               {books.length ? (
                 <Books>
+                  <h3>{this.state.noResponse}</h3>
                   {books.map(item => (
                     // <BookItem>
                     <div className="card sm-4">
