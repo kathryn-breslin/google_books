@@ -158,14 +158,14 @@ class Search extends Component {
                               {item.volumeInfo.title}
                             </h5>
                             <p className="card-text">
-                              {item.volumeInfo.description}
+                              {item.volumeInfo.description || "No description provided."}
                             </p>
                           </div>
                         </div>
                       </div>
                       <div className="card-footer bg-transparent">
                         <a
-                          href={item.volumeInfo.previewLink}
+                          href={item.volumeInfo.previewLink || "No link provided."}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
