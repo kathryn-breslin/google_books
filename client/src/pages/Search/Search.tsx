@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import { Jumbotron, SearchBar, Books } from "../../components";
 import { toast, ToastContainer } from "react-toastify";
+import { Button } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import API from "../../utils/API";
 import "./Search.css";
@@ -51,34 +52,59 @@ function notify() {
   toastList.add(id);
 }
 
+// function noBooks () {
+//   let toastIdToDismiss: any = null;
+
+//   if (toastList.size === MAX_TOAST) {
+//     const arr = Array.from(toastList);
+//     const toastId = arr[0];
+
+//     if (toastId) {
+//       toastIdToDismiss = toastId;
+//     }
+//   }
+
+//   const id: any = toast("No books for this search. Please try again!", {
+//     onClose: () => toastList.delete(id),
+//     onOpen: () => {
+//       if (toastIdToDismiss !== null) {
+//         setTimeout(() => {
+//           toast.dismiss(toastIdToDismiss);
+//         }, 1000);
+//       }
+//     }
+//   });
+//   toastList.add(id);
+// }
+
 class Search extends Component {
   state: IBook = {
     books: [],
     search: "",
     title: "",
     description: "",
-    image: "", 
+    image: "",
     noResponse: ""
   };
 
   searchBooks = (search: string) => {
     console.log("This is the search being passed: " + search);
     API.search(search).then(res => {
-      if (!res.data.length) {
-        console.log("No Responses!")
-        this.noBooks();
-        this.setState({ search: ""})
-      
-      } else {
+      // if (!res.data.length ) {
+      //   console.log("No Responses!");
+      //   this.noBooks();
+      //   this.setState({ search: "" });
+      // } else {
         this.setState({ books: res.data.items, search: "" });
-      }
+      // }
     });
     console.log(this.state.books);
   };
 
   noBooks = () => {
-    alert("No Books for this search. Please try again!")
+    alert("No books for this search!")
   }
+
 
   handleInputChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
