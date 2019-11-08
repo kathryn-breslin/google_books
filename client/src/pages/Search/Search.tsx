@@ -52,31 +52,6 @@ function notify() {
   toastList.add(id);
 }
 
-// function noBooks () {
-//   let toastIdToDismiss: any = null;
-
-//   if (toastList.size === MAX_TOAST) {
-//     const arr = Array.from(toastList);
-//     const toastId = arr[0];
-
-//     if (toastId) {
-//       toastIdToDismiss = toastId;
-//     }
-//   }
-
-//   const id: any = toast("No books for this search. Please try again!", {
-//     onClose: () => toastList.delete(id),
-//     onOpen: () => {
-//       if (toastIdToDismiss !== null) {
-//         setTimeout(() => {
-//           toast.dismiss(toastIdToDismiss);
-//         }, 1000);
-//       }
-//     }
-//   });
-//   toastList.add(id);
-// }
-
 class Search extends Component {
   state: IBook = {
     books: [],
@@ -90,15 +65,9 @@ class Search extends Component {
   searchBooks = (search: string) => {
     console.log("This is the search being passed: " + search);
     API.search(search).then(res => {
-      // if (!res.data.length ) {
-      //   console.log("No Responses!");
-      //   this.noBooks();
-      //   this.setState({ search: "" });
-      // } else {
+      console.log(res);
         this.setState({ books: res.data.items, search: "" });
-      // }
     });
-    console.log(this.state.books);
   };
 
   noBooks = () => {
@@ -178,7 +147,7 @@ class Search extends Component {
                       <div className="row no-gutters">
                         <div className="col-sm-4">
                           <img
-                            src={item.volumeInfo.imageLinks.thumbnail}
+                            src={item.volumeInfo.imageLinks ? (item.volumeInfo.imageLinks.thumbnail) : ("http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder.png")}
                             className="card-img"
                             alt={item.volumeInfo.title}
                           />
